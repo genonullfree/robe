@@ -16,6 +16,9 @@ read food
 echo How old are you, $name?
 speak-ng "How old are you, $name?"
 read age
+echo What is your favorite Batman character?
+speak-ng "What is your favorite Batman character?"
+read batman
 
 next_age=$[age+1]
 
@@ -31,5 +34,5 @@ speak-ng "and make you your favorite $food."
 echo
 echo It was very nice to meet you $name!
 speak-ng "It was very nice to meet you $name!"
-echo Goodbye for now!
-speak-ng "Goodbye for now!"
+echo Goodbye for now, $batman!
+speak-ng "Goodbye for now, $batman!"
