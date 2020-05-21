@@ -19,6 +19,9 @@ read age
 echo What is your favorite Batman character?
 speak-ng "What is your favorite Batman character?"
 read batman
+echo What is your favorite pet?
+speak-ng "What is your favorite pet?"
+read pet
 
 next_age=$[age+1]
 
@@ -27,8 +30,8 @@ echo Hello $name
 speak-ng "Hello $name"
 echo On your next birthday, when you turn $next_age,
 speak-ng "On your next birthday, when you turn $next_age,"
-echo I would like to paint your room $color,
-speak-ng "I would like to paint your room $color,"
+echo I would like to paint your room $color, with your favorite pet $pet,
+speak-ng "I would like to paint your room $color, with your favorite pet $pet"
 echo and make you your favorite $food.
 speak-ng "and make you your favorite $food."
 echo
