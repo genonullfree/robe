@@ -1,41 +1,55 @@
 clear
 
+spk=$(which espeak-ng)
+
+function speak {
+    echo $1
+    $spk "$1"
+}
+
+function hello {
+    speak "What is your name?"
+    read name
+    speak "What is your favorite color, $name?"
+    read color
+    speak "What is your favorite food, $name?"
+    read food
+    speak "How old are you, $name?"
+    read age
+    speak "What is your favorite Batman character?"
+    read batman
+    speak "What is your favorite pet?"
+    read pet
+
+    next_age=$[age+1]
+
+    echo
+    speak "Hello $name"
+    speak "On your next birthday, when you turn $next_age,"
+    speak "I would like to paint your room $color, with your favorite pet $pet"
+    speak "and make you your favorite $food."
+}
+
+function goodbye {
+    speak "It was very nice to meet you"
+    speak "Goodbye for now!"
+}
+
+#main
 echo Hello, my name is Robe.
 speak-ng "Hello, my name is ro-BE."
-echo It\'s pronounced ro-BEE.
-speak-ng "Its pronounced ro-BE."
-echo What is your name?
-speak-ng "What is your name?"
-read name
-echo What is your favorite color, $name?
-speak-ng "What is your favorite color, $name?"
-read color
-echo What is your favorite food, $name?
-speak-ng "What is your favorite food, $name?"
-read food
-echo How old are you, $name?
-speak-ng "How old are you, $name?"
-read age
-echo What is your favorite Batman character?
-speak-ng "What is your favorite Batman character?"
-read batman
-echo What is your favorite pet?
-speak-ng "What is your favorite pet?"
-read pet
-
-next_age=$[age+1]
-
 echo
-echo Hello $name
-speak-ng "Hello $name"
-echo On your next birthday, when you turn $next_age,
-speak-ng "On your next birthday, when you turn $next_age,"
-echo I would like to paint your room $color, with your favorite pet $pet,
-speak-ng "I would like to paint your room $color, with your favorite pet $pet"
-echo and make you your favorite $food.
-speak-ng "and make you your favorite $food."
+speak "Enter the number that you would like to play:"
 echo
-echo It was very nice to meet you $name!
-speak-ng "It was very nice to meet you $name!"
-echo Goodbye for now, $batman!
-speak-ng "Goodbye for now, $batman!"
+speak "1 - Get to know me"
+
+read num
+
+case $num in
+    1)
+        hello
+        ;;
+    *)
+        goodbye
+        ;;
+esac
