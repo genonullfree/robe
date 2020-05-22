@@ -28,6 +28,29 @@ function hello {
     speak "On your next birthday, when you turn $next_age,"
     speak "I would like to paint your room $color, with your favorite pet $pet"
     speak "and make you your favorite $food."
+
+    clear
+}
+
+function guessing {
+    num=$[$RANDOM%101]
+    speak "Pick a number between 0 and 100. You have 5 guesses."
+    for i in {1..5}
+    do
+        read guess
+        if [[ "$guess" == "$num" ]]; then
+            speak "Congratulations! You guessed the correct number $num!"
+            return
+        elif [[ "$guess" -gt "$num" ]]; then
+            speak "Sorry, thats too high."
+        elif [[ "$guess" -le "$num" ]]; then
+            speak "Sorry, thats too low."
+        fi
+        speak "You have $[5-i] turns left."
+    done
+    speak "The number was: $num"
+
+    clear
 }
 
 function goodbye {
@@ -39,17 +62,25 @@ function goodbye {
 echo Hello, my name is Robe.
 speak-ng "Hello, my name is ro-BE."
 echo
-speak "Enter the number that you would like to play:"
-echo
-speak "1 - Get to know me"
 
-read num
+while true; do
+    speak "Enter the number that you would like to play:"
+    echo
+    speak "1 - Get to know me"
+    speak "2 - Guessing game"
 
-case $num in
-    1)
-        hello
-        ;;
-    *)
-        goodbye
-        ;;
-esac
+    read num
+
+    case $num in
+        1)
+            hello
+            ;;
+        2)
+            guessing
+            ;;
+        *)
+            goodbye
+            exit
+            ;;
+    esac
+done
