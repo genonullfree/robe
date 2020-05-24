@@ -33,7 +33,7 @@ function hello {
 }
 
 function guessing {
-    num=$[$RANDOM%101]
+    num=$[$RANDOM%51]
     speak "Pick a number between 0 and 50. You have 7 guesses."
     for i in {1..7}
     do
@@ -58,7 +58,7 @@ function letters {
     speak "G"
     time read letter
     if [[ $letter -eq "g" ]]; then
-        speak "Good job!
+        speak "Good job!"
     fi
 }
 
