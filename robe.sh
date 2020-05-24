@@ -34,8 +34,8 @@ function hello {
 
 function guessing {
     num=$[$RANDOM%101]
-    speak "Pick a number between 0 and 100. You have 5 guesses."
-    for i in {1..5}
+    speak "Pick a number between 0 and 50. You have 7 guesses."
+    for i in {1..7}
     do
         read guess
         if [[ "$guess" == "$num" ]]; then
@@ -46,11 +46,20 @@ function guessing {
         elif [[ "$guess" -le "$num" ]]; then
             speak "Sorry, thats too low."
         fi
-        speak "You have $[5-i] turns left."
+        speak "You have $[7-i] turns left."
     done
     speak "The number was: $num"
 
     clear
+}
+
+function letters {
+    speak "Type the letter that appears as fast as you can"
+    speak "G"
+    time read letter
+    if [[ $letter -eq "g" ]]; then
+        speak "Good job!
+    fi
 }
 
 function goodbye {
@@ -68,6 +77,7 @@ while true; do
     echo
     speak "1 - Get to know me"
     speak "2 - Guessing game"
+    speak "3 - Learning keyboard letters"
 
     read num
 
