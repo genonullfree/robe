@@ -56,9 +56,11 @@ function guessing {
 function letters {
     speak "Type the letter that appears as fast as you can"
     speak "G"
-    time read letter
-    if [[ $letter -eq "g" ]]; then
-        speak "Good job!"
+    delay=$((time read letter) 2>&1 | grep real | cut -d 'm' -f 2)
+    if [[ $letter -eq 'g' ]]; then
+        speak "Good job! You took $delay seconds"
+    else
+        speak "Try again!"
     fi
 }
 
@@ -87,6 +89,9 @@ while true; do
             ;;
         2)
             guessing
+            ;;
+        3)
+            letters
             ;;
         *)
             goodbye
