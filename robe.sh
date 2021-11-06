@@ -1,6 +1,12 @@
+#!/bin/bash
+
 clear
 
-spk=$(which espeak-ng)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    spk=$(which espeak)
+else
+    spk=$(which espeak-ng)
+fi
 
 function speak {
     echo $1
@@ -76,8 +82,8 @@ function spelling {
     for i in $words
     do
         while true; do
-            speak-ng $i
-            echo -n "Type the word: "
+            echo -n "Type the word you hear: "
+            $spk $i
             read guess
             if [[ "$guess" == "$i" ]]; then
                 speak "Great job!"
@@ -97,7 +103,7 @@ function goodbye {
 
 #main
 echo Hello, my name is Robe.
-speak-ng "Hello, my name is ro-BE."
+$spk "Hello, my name is ro-BE."
 echo
 
 while true; do
