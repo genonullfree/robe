@@ -55,13 +55,19 @@ function guessing {
 
 function letters {
     speak "Type the letter that appears as fast as you can"
-    speak "G"
-    delay=$((time read letter) 2>&1 | grep real | cut -d 'm' -f 2)
-    if [[ $letter -eq 'g' ]]; then
-        speak "Good job! You took $delay seconds"
-    else
-        speak "Try again!"
-    fi
+    for i in {1..10}
+    do
+        r=$(((RANDOM%26)))
+        letters=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        letters_lower=abcdefghijklmnopqrstuvwxyz
+        speak ${letters:$r:1}
+        read letter
+        if [[ ${letter:0:1} == ${letters:$r:1} || ${letter:0:1} == ${letters_lower:$r:1} ]]; then
+            speak "Good job!"
+        else
+            speak "Try again!"
+        fi
+    done
 }
 
 function spelling {
