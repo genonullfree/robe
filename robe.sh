@@ -64,6 +64,26 @@ function letters {
     fi
 }
 
+function spelling {
+    words=$(cat words.txt)
+
+    for i in $words
+    do
+        while true; do
+            speak-ng $i
+            echo -n "Type the word: "
+            read guess
+            if [[ "$guess" == "$i" ]]; then
+                speak "Great job!"
+                break
+            else
+                speak "Sorry, try again"
+            fi
+        done
+    done
+
+}
+
 function goodbye {
     speak "It was very nice to meet you"
     speak "Goodbye for now!"
@@ -80,6 +100,7 @@ while true; do
     speak "1 - Get to know me"
     speak "2 - Guessing game"
     speak "3 - Learning keyboard letters"
+    speak "4 - Spelling list"
 
     read num
 
@@ -92,6 +113,9 @@ while true; do
             ;;
         3)
             letters
+            ;;
+        4)
+            spelling
             ;;
         *)
             goodbye
